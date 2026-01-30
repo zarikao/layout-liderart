@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços - Fachadas em ACM | Liderart</title>
+    <style>
+        /* --- REUTILIZANDO A PALETA DA HOME --- */
+        :root {
+            --primary-tiffany: #47AFBA;
+            --primary-dark: #358a94;
+            --white: #ffffff;
+            --base-dark-green: #053225;
+            --base-grey: #7E777C;
+            --accent-lion: #BF8C4A;
+            --bg-light: #f9fbfb;
+        }
+
+        /* --- GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--base-grey); background-color: var(--white); line-height: 1.7; }
+        a { text-decoration: none; transition: 0.3s ease; }
+        ul { list-style: none; }
+        h1, h2, h3, h4 { color: var(--base-dark-green); font-weight: 700; }
+
+        /* --- HEADER IGUAL À HOME --- */
+        header {
+            background-color: var(--white);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        .logo { color: var(--base-dark-green); font-size: 1.6rem; font-weight: 800; text-transform: uppercase; }
+        .logo span { color: var(--primary-tiffany); }
+        
+        nav ul { display: flex; gap: 35px; align-items: center; }
+        nav a { color: var(--base-dark-green); font-size: 0.95rem; font-weight: 600; position: relative; }
+        nav a:hover { color: var(--primary-tiffany); }
+        .btn-header {
+            background-color: var(--primary-tiffany); padding: 12px 30px; border-radius: 50px;
+            color: var(--white) !important; font-weight: bold; box-shadow: 0 4px 15px rgba(71, 175, 186, 0.3);
+        }
+        .btn-header:hover { background-color: var(--base-dark-green); transform: translateY(-2px); }
+
+        /* Mobile Menu */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; }
+        .bar { width: 30px; height: 3px; background-color: var(--base-dark-green); border-radius: 3px; }
+
+        /* --- HEADER DA PÁGINA (HERO MENOR) --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-tiffany) 0%, var(--primary-dark) 100%);
+            padding: 140px 5% 60px; /* Mais padding top por causa do menu fixo */
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .page-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--white); position: relative; z-index: 2; }
+        .breadcrumbs { font-size: 0.9rem; opacity: 0.9; position: relative; z-index: 2; }
+        .breadcrumbs a { color: var(--white); font-weight: 600; }
+
+        /* --- LAYOUT PRINCIPAL (SIDEBAR + CONTEÚDO) --- */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Coluna larga (conteúdo) e Estreita (Sidebar) */
+            gap: 50px;
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Coluna Esquerda: Detalhes */
+        .service-details h2 { font-size: 2rem; margin-bottom: 20px; }
+        .service-details p { margin-bottom: 20px; font-size: 1.05rem; }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Lista de Benefícios */
+        .benefits-list { margin: 30px 0; }
+        .benefits-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--base-dark-green);
+        }
+        .check-icon {
+            width: 25px; height: 25px;
+            background-color: rgba(71, 175, 186, 0.2);
+            color: var(--primary-tiffany);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        /* Galeria do Serviço */
+        .service-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .gallery-item {
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* Coluna Direita: Sidebar Fixa */
+        .sidebar {
+            position: sticky; /* Faz a sidebar acompanhar o scroll */
+            top: 100px;
+            height: fit-content;
+        }
+
+        /* Card de Contato Rápido */
+        .contact-card {
+            background-color: var(--base-dark-green);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(5, 50, 37, 0.2);
+            margin-bottom: 30px;
+        }
+        .contact-card h3 { color: var(--white); margin-bottom: 15px; }
+        .contact-card input, .contact-card textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: none; border-radius: 8px; background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+        .contact-card input::placeholder { color: rgba(255,255,255,0.6); }
+        .btn-submit {
+            width: 100%; background-color: var(--accent-lion); color: var(--white);
+            padding: 12px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-submit:hover { background-color: var(--white); color: var(--accent-lion); }
+
+        /* Menu de Outros Serviços */
+        .other-services {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #eee;
+        }
+        .other-services h4 { margin-bottom: 20px; }
+        .service-link {
+            display: block;
+            padding: 12px 15px;
+            background-color: var(--white);
+            margin-bottom: 10px;
+            border-radius: 8px;
+            color: var(--base-grey);
+            border-left: 3px solid transparent;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+        .service-link:hover, .service-link.active {
+            border-left-color: var(--primary-tiffany);
+            color: var(--primary-tiffany);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transform: translateX(5px);
+        }
+
+        /* --- PROCESS SECTION --- */
+        .process-section {
+            background-color: var(--bg-light);
+            padding: 80px 5%;
+            text-align: center;
+        }
+        .process-steps {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        .step { flex: 1; min-width: 200px; max-width: 300px; }
+        .step-icon {
+            width: 70px; height: 70px;
+            background-color: var(--white);
+            color: var(--primary-tiffany);
+            border: 2px solid var(--primary-tiffany);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        .step h4 { margin-bottom: 10px; }
+
+        /* --- FOOTER IGUAL À HOME --- */
+        footer {
+            background-color: var(--base-dark-green);
+            color: rgba(255,255,255,0.7); padding: 50px 5% 20px; text-align: center;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 900px) {
+            .content-wrapper { grid-template-columns: 1fr; } /* Empilha Sidebar abaixo */
+            .sidebar { position: static; order: 2; }
+            .service-details { order: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: var(--white);
+                border-top: 1px solid #eee;
+                max-height: 0; overflow: hidden; transition: 0.3s;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            nav.active { max-height: 350px; padding: 20px 0; }
+            nav ul { flex-direction: column; gap: 15px; }
+            .btn-header { width: 80%; text-align: center; margin-top: 10px; }
+            
+            .page-title { font-size: 2rem; }
+            .process-steps { gap: 30px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">LIDER<span>ART</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="empresa.html">A Empresa</a></li>
+                <li><a href="servicos.html" style="color: var(--primary-tiffany);">Serviços</a></li>
+                <li><a href="#contato" class="btn-header">Orçamento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1 class="page-title">Fachadas em ACM</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> &nbsp;/&nbsp; <a href="#">Serviços</a> &nbsp;/&nbsp; Fachadas
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        
+        <div class="service-details">
+            <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="main-image" alt="Fachada em ACM Liderart">
+
+            <h2>Impacto visual e durabilidade</h2>
+            <p>A fachada é o cartão de visita da sua empresa. Trabalhamos com <strong>ACM (Alumínio Composto)</strong>, um material que une sofisticação, resistência e versatilidade. Seja para renovar o visual de uma loja antiga ou criar a identidade de um novo empreendimento, nossas fachadas são projetadas para durar e impressionar.</p>
+            
+            <p>Utilizamos corte em router CNC de alta precisão e combinamos o ACM com outros materiais nobres, como letras caixa em acrílico, aço inox e iluminação LED interna ou externa.</p>
+
+            <ul class="benefits-list">
+                <li><span class="check-icon">✓</span> Alta resistência a intempéries (sol e chuva).</li>
+                <li><span class="check-icon">✓</span> Acabamento premium e moderno.</li>
+                <li><span class="check-icon">✓</span> Facilidade de limpeza e manutenção.</li>
+                <li><span class="check-icon">✓</span> Diversidade de cores e texturas.</li>
+            </ul>
+
+            <h3 style="margin-top: 50px; margin-bottom: 20px;">Galeria de Projetos</h3>
+            <p>Confira alguns trabalhos realizados pela Liderart:</p>
+            
+            <div class="service-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Obra 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Obra 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Obra 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Obra 4">
+                </div>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            
+            <div class="contact-card">
+                <h3>Solicitar Orçamento</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;">Preencha abaixo e receba uma proposta para este serviço.</p>
+                <form>
+                    <input type="text" placeholder="Seu Nome">
+                    <input type="text" placeholder="Nome da Empresa">
+                    <input type="text" placeholder="Seu WhatsApp">
+                    <textarea rows="3" placeholder="Descreva brevemente sua ideia..."></textarea>
+                    <button type="submit" class="btn-submit">ENVIAR AGORA</button>
+                </form>
+            </div>
+
+            <div class="other-services">
+                <h4>Outros Serviços</h4>
+                <a href="#" class="service-link active">Fachadas em ACM</a>
+                <a href="#" class="service-link">Impressão Digital HD</a>
+                <a href="#" class="service-link">Troféus e Placas</a>
+                <a href="#" class="service-link">Sinalização Interna</a>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <section class="process-section">
+        <h2 style="margin-bottom: 10px;">Como funciona nosso trabalho?</h2>
+        <div style="width: 60px; height: 4px; background: var(--primary-tiffany); margin: 0 auto; border-radius: 2px;"></div>
+        
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-icon">1</div>
+                <h4>Briefing & Medição</h4>
+                <p style="font-size: 0.9rem;">Entendemos sua necessidade e analisamos o local.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">2</div>
+                <h4>Design & Projeto</h4>
+                <p style="font-size: 0.9rem;">Criamos o layout 3D para aprovação.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">3</div>
+                <h4>Produção</h4>
+                <p style="font-size: 0.9rem;">Corte, montagem e acabamento na fábrica.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">4</div>
+                <h4>Instalação</h4>
+                <p style="font-size: 0.9rem;">Equipe especializada realiza a montagem final.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">LIDER<span>ART</span></div>
+        <p>&copy; 2024 Liderart Comunicação Visual. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

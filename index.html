@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Empresa - Nossa História | Liderart</title>
+    <style>
+        /* --- REUTILIZANDO EXATAMENTE O CSS DA PÁGINA DE SERVIÇOS --- */
+        :root {
+            --primary-tiffany: #47AFBA;
+            --primary-dark: #358a94;
+            --white: #ffffff;
+            --base-dark-green: #053225;
+            --base-grey: #7E777C;
+            --accent-lion: #BF8C4A;
+            --bg-light: #f9fbfb;
+        }
+
+        /* --- GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--base-grey); background-color: var(--white); line-height: 1.7; }
+        a { text-decoration: none; transition: 0.3s ease; }
+        ul { list-style: none; }
+        h1, h2, h3, h4 { color: var(--base-dark-green); font-weight: 700; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--white);
+            padding: 1rem 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        .logo { color: var(--base-dark-green); font-size: 1.6rem; font-weight: 800; text-transform: uppercase; }
+        .logo span { color: var(--primary-tiffany); }
+        
+        nav ul { display: flex; gap: 35px; align-items: center; }
+        nav a { color: var(--base-dark-green); font-size: 0.95rem; font-weight: 600; position: relative; }
+        nav a:hover { color: var(--primary-tiffany); }
+        .btn-header {
+            background-color: var(--primary-tiffany); padding: 12px 30px; border-radius: 50px;
+            color: var(--white) !important; font-weight: bold; box-shadow: 0 4px 15px rgba(71, 175, 186, 0.3);
+        }
+        .btn-header:hover { background-color: var(--base-dark-green); transform: translateY(-2px); }
+        
+        /* Mobile Menu */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; }
+        .bar { width: 30px; height: 3px; background-color: var(--base-dark-green); border-radius: 3px; }
+
+        /* --- PAGE HERO (Igual Serviços) --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-tiffany) 0%, var(--primary-dark) 100%);
+            padding: 140px 5% 60px;
+            color: var(--white); text-align: center; position: relative; overflow: hidden;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .page-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--white); position: relative; z-index: 2; }
+        .breadcrumbs { font-size: 0.9rem; opacity: 0.9; position: relative; z-index: 2; }
+        .breadcrumbs a { color: var(--white); font-weight: 600; }
+
+        /* --- LAYOUT PRINCIPAL (SIDEBAR + CONTEÚDO) --- */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Mesma proporção da pág. Serviços */
+            gap: 50px;
+            padding: 80px 5%;
+            max-width: 1400px; margin: 0 auto;
+        }
+
+        /* Coluna Esquerda: Texto */
+        .details-col h2 { font-size: 2rem; margin-bottom: 20px; }
+        .details-col h3 { font-size: 1.5rem; margin: 40px 0 20px; color: var(--base-dark-green); }
+        .details-col p { margin-bottom: 20px; font-size: 1.05rem; }
+        
+        .main-image {
+            width: 100%; height: 400px; object-fit: cover; border-radius: 20px;
+            margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Cards de Valores (Estilo similar aos produtos) */
+        .values-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin-top: 30px;
+        }
+        .value-card {
+            background: var(--bg-light); padding: 25px; border-radius: 12px;
+            border-left: 4px solid var(--primary-tiffany);
+            transition: 0.3s;
+        }
+        .value-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .value-card h4 { color: var(--primary-tiffany); margin-bottom: 10px; }
+        .value-card p { font-size: 0.9rem; margin: 0; }
+
+        /* Coluna Direita: Sidebar */
+        .sidebar { position: sticky; top: 100px; height: fit-content; }
+
+        /* Card de Contato (Igual Serviços) */
+        .contact-card {
+            background-color: var(--base-dark-green); color: var(--white);
+            padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(5, 50, 37, 0.2); margin-bottom: 30px;
+        }
+        .contact-card h3 { color: var(--white); margin-bottom: 15px; }
+        .contact-card input, .contact-card textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            border: none; border-radius: 8px; background: rgba(255,255,255,0.1); color: var(--white);
+        }
+        .contact-card input::placeholder { color: rgba(255,255,255,0.6); }
+        .btn-submit {
+            width: 100%; background-color: var(--accent-lion); color: var(--white);
+            padding: 12px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-submit:hover { background-color: var(--white); color: var(--accent-lion); }
+
+        /* Box de Info Rápida (Stats) */
+        .info-card {
+            background-color: var(--white); padding: 30px; border-radius: 20px;
+            border: 1px solid #eee; box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+        }
+        .info-card h4 { margin-bottom: 20px; border-bottom: 2px solid var(--primary-tiffany); padding-bottom: 10px; display: inline-block; }
+        .info-list li {
+            margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-size: 0.95rem;
+        }
+        .icon-circle {
+            width: 35px; height: 35px; background: var(--bg-light); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--primary-tiffany);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--base-dark-green);
+            color: rgba(255,255,255,0.7); padding: 50px 5% 20px; text-align: center;
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 900px) {
+            .content-wrapper { grid-template-columns: 1fr; }
+            .sidebar { position: static; order: 2; }
+            .details-col { order: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: var(--white); border-top: 1px solid #eee;
+                max-height: 0; overflow: hidden; transition: 0.3s;
+            }
+            nav.active { max-height: 350px; padding: 20px 0; }
+            nav ul { flex-direction: column; gap: 15px; }
+            .btn-header { width: 80%; text-align: center; margin-top: 10px; }
+            .page-title { font-size: 2rem; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">LIDER<span>ART</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="empresa.html" style="color: var(--primary-tiffany);">A Empresa</a></li>
+                <li><a href="index.html#servicos">Serviços</a></li>
+                <li><a href="#contato" class="btn-header">Orçamento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1 class="page-title">Sobre a Liderart</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> &nbsp;/&nbsp; Quem Somos
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        
+        <div class="details-col">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="main-image" alt="Sede da Liderart">
+
+            <h2>16 Anos de História e Inovação</h2>
+            <p>A <strong>Liderart</strong> nasceu em 2008 com um objetivo claro: transformar a paisagem visual de Minas Gerais através de qualidade técnica e criatividade. O que começou como uma pequena gráfica, hoje é uma referência em produção de fachadas e comunicação visual de grande porte.</p>
+            
+            <p>Instalada em sede própria no bairro Letícia, em Belo Horizonte, nossa estrutura nos permite atender desde pequenas empresas até grandes indústrias, sempre mantendo o padrão de acabamento que se tornou nossa marca registrada.</p>
+
+            <h3>Nossos Pilares</h3>
+            <p>Nossa conduta é guiada por três princípios fundamentais que garantem a satisfação de cada cliente:</p>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <h4>Missão</h4>
+                    <p>Materializar identidades visuais com excelência, durabilidade e impacto estético.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Visão</h4>
+                    <p>Ser a maior referência em soluções de fachadas e sinalização de MG.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Valores</h4>
+                    <p>Transparência, pontualidade rigorosa e acabamento artesanal.</p>
+                </div>
+            </div>
+
+            <h3>Estrutura e Tecnologia</h3>
+            <p>Investimos constantemente em maquinário de ponta. Contamos com Router CNC para cortes precisos em ACM e Acrílico, Impressoras de Grande Formato com cura UV e uma equipe de serralheria e instalação própria. Isso elimina terceirizações e garante que seu projeto saia exatamente como planejado.</p>
+        </div>
+
+        <aside class="sidebar">
+            
+            <div class="info-card">
+                <h4>Liderart em Números</h4>
+                <ul class="info-list">
+                    <li><div class="icon-circle">📅</div> <span>Desde 2008 no mercado</span></li>
+                    <li><div class="icon-circle">🏗️</div> <span>+2.000 Projetos Entregues</span></li>
+                    <li><div class="icon-circle">📍</div> <span>Sede Própria em BH</span></li>
+                    <li><div class="icon-circle">⭐</div> <span>Top of Mind Regional</span></li>
+                </ul>
+            </div>
+            
+            <br>
+
+            <div class="contact-card">
+                <h3>Fale Conosco</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;">Tem um projeto em mente? Vamos conversar.</p>
+                <form>
+                    <input type="text" placeholder="Seu Nome">
+                    <input type="text" placeholder="Nome da Empresa">
+                    <input type="email" placeholder="Seu Email">
+                    <textarea rows="3" placeholder="Como podemos ajudar?"></textarea>
+                    <button type="submit" class="btn-submit">ENVIAR MENSAGEM</button>
+                </form>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <footer>
+        <div class="logo">LIDER<span>ART</span></div>
+        <p>&copy; 2024 Liderart Comunicação Visual. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
