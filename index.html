@@ -5,257 +5,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liderart - Comunicação Visual Especializada</title>
     <style>
-        /* --- PALETA DE CORES REFINADA (Baseada no Primeiro Código) --- */
+        /* --- PALETA DE CORES --- */
         :root {
-            --primary-tiffany: #47AFBA; /* Principal: Azul Tiffany */
-            --white: #ffffff;           
+            --primary-tiffany: #47AFBA;
+            --white: #ffffff;            
+            --base-dark-green: #053225;
+            --base-grey: #7E777C;
+            --accent-lion: #BF8C4A;
+            --bg-light: #f9fbfb;
             
-            --base-dark-green: #053225; /* Base: Verde Escuro */
-            --base-grey: #7E777C;       /* Base: Cinza */
-            
-            --accent-lion: #BF8C4A;     /* Apoio: Dourado/Lion */
-            --accent-coffee: #694A38;   /* Apoio: Café */
-            
-            --bg-light: #f9fbfb;        /* Fundo claro */
+            /* Parceiros */
+            --ml-yellow: #ffe600;
+            --shopee-orange: #ee4d2d;
         }
 
         /* --- GERAL --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
         html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-        body { color: var(--base-grey); background-color: var(--white); line-height: 1.7; }
+        body { color: var(--base-grey); background-color: var(--white); line-height: 1.7; overflow-x: hidden; }
         a { text-decoration: none; transition: 0.3s ease; }
         ul { list-style: none; }
         h1, h2, h3, h4 { color: var(--base-dark-green); font-weight: 700; letter-spacing: -0.5px; }
-        
-        /* Utilitários */
-        .text-tiffany { color: var(--primary-tiffany); }
-        .section-padding { padding: 100px 5%; }
+        img { max-width: 100%; display: block; }
 
-        /* --- HEADER (Estilo Código 1) --- */
+        /* Utilitários */
+        .section-padding { padding: 100px 5%; }
+        .text-tiffany { color: var(--primary-tiffany); }
+
+        /* --- HEADER --- */
         header {
             background-color: var(--white);
             padding: 1rem 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
-
-        .logo {
-            color: var(--base-dark-green);
-            font-size: 1.6rem;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
+        .logo { color: var(--base-dark-green); font-size: 1.6rem; font-weight: 800; text-transform: uppercase; }
         .logo span { color: var(--primary-tiffany); }
 
         nav ul { display: flex; gap: 35px; align-items: center; }
-        
-        nav a {
-            color: var(--base-dark-green);
-            font-size: 0.95rem;
-            font-weight: 600;
-            position: relative;
-        }
-        
+        nav a { color: var(--base-dark-green); font-size: 0.95rem; font-weight: 600; position: relative; }
         nav a::after {
             content: ''; position: absolute; width: 0; height: 2px;
-            bottom: -5px; left: 0; background-color: var(--primary-tiffany);
-            transition: 0.3s;
+            bottom: -5px; left: 0; background-color: var(--primary-tiffany); transition: 0.3s;
         }
         nav a:hover { color: var(--primary-tiffany); }
         nav a:hover::after { width: 100%; }
 
         .btn-header {
-            background-color: var(--primary-tiffany);
-            padding: 12px 30px;
-            border-radius: 50px;
-            color: var(--white) !important;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(71, 175, 186, 0.3);
+            background-color: var(--primary-tiffany); padding: 12px 30px; border-radius: 50px;
+            color: var(--white) !important; font-weight: bold; box-shadow: 0 4px 15px rgba(71, 175, 186, 0.3);
         }
         .btn-header:hover { background-color: var(--base-dark-green); transform: translateY(-2px); }
 
         .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; }
         .bar { width: 30px; height: 3px; background-color: var(--base-dark-green); border-radius: 3px; }
 
-        /* --- HERO SECTION (Estilo Código 1) --- */
+        /* --- HERO SECTION --- */
         .hero {
-            min-height: 95vh;
+            min-height: 90vh;
             background: linear-gradient(135deg, var(--primary-tiffany) 0%, #358a94 100%);
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            margin-top: 60px;
-            position: relative;
-            overflow: hidden;
+            display: flex; align-items: center; padding: 0 5%; margin-top: 60px;
+            position: relative; overflow: hidden;
         }
-
         .hero::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             opacity: 0.4;
         }
-
         .hero-content { flex: 1; max-width: 600px; z-index: 2; color: var(--white); }
         .hero-content h1 { color: var(--white); font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; }
         .hero-content p { font-size: 1.25rem; margin-bottom: 35px; opacity: 0.9; }
-
         .btn-hero {
-            background-color: var(--accent-lion);
-            color: var(--white);
-            padding: 18px 45px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            display: inline-block;
+            background-color: var(--accent-lion); color: var(--white); padding: 18px 45px;
+            font-size: 1.1rem; font-weight: bold; border-radius: 5px; display: inline-block;
             box-shadow: 0 10px 20px -10px rgba(191, 140, 74, 0.5);
         }
         .btn-hero:hover { transform: translateY(-5px); background-color: var(--white); color: var(--accent-lion); }
-
-        .hero-img-container { flex: 1; display: flex; justify-content: center; z-index: 2; }
+        .hero-img-container { flex: 1; display: flex; justify-content: center; z-index: 2; position: relative; }
         .hero-floating-img {
             max-width: 100%; height: auto; border-radius: 20px;
             box-shadow: 30px 30px 0px rgba(255,255,255,0.1);
-            display: none;
         }
         @media(min-width: 992px) { .hero-floating-img { display: block; } }
 
-        /* --- TÍTULOS --- */
-        .section-header { text-align: center; margin-bottom: 70px; }
+
+        /* --- PARCEIROS HUB --- */
+        .partners-hub {
+            width: 100%;
+            min-height: 90vh; 
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .partners-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(115deg, var(--ml-yellow) 50%, var(--shopee-orange) 50.1%);
+            z-index: 1;
+        }
+
+        .partners-container {
+            z-index: 2; width: 100%; height: 100%;
+            display: flex; justify-content: space-between;
+        }
+
+        .partner-zone {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly; /* Distribuição Otimizada */
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .zone-ml { padding-right: 10%; } 
+        .zone-shopee { padding-left: 10%; }
+
+        .hub-logo {
+            max-width: 250px; height: auto;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.15));
+            transition: transform 0.3s;
+        }
+        .hub-logo:hover { transform: scale(1.05); }
+        .shopee-logo { filter: brightness(0) invert(1) drop-shadow(0 5px 5px rgba(0,0,0,0.2)); }
+
+        .partner-desc {
+            max-width: 400px; font-size: 1rem; font-weight: 500;
+            color: var(--base-dark-green); opacity: 0.9; margin: 0 auto;
+        }
+        .desc-white { color: white; opacity: 1; }
+
+        .marketplace-cards {
+            display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 350px;
+        }
+
+        .mp-card {
+            background: rgba(255,255,255,0.95); padding: 25px; border-radius: 12px;
+            text-align: left; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: space-between;
+            color: var(--base-dark-green); font-weight: 700;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-decoration: none;
+        }
+        .mp-card:hover { transform: translateY(-5px); background: #fff; }
+
+        .mp-content { display: flex; flex-direction: column; }
+        .mp-label { font-size: 0.8rem; text-transform: uppercase; color: #888; font-weight: 600; margin-bottom: 5px; }
+        .mp-title { font-size: 1.1rem; }
+        .arrow { font-size: 1.5rem; color: var(--primary-tiffany); }
+
+
+        /* --- QUEM SOMOS (SLIDER) --- */
+        /* Flex padrão coloca slider à esquerda no desktop */
+        .empresa { background-color: var(--white); display: flex; gap: 60px; align-items: center; }
+        .empresa-text { flex: 1; }
+        
+        .slider-container {
+            flex: 1; height: 450px; position: relative;
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 20px 20px 0px rgba(71, 175, 186, 0.2);
+        }
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;
+        }
+        .slide.active { opacity: 1; }
+
+        .highlight-box {
+            border-left: 5px solid var(--primary-tiffany); 
+            background: linear-gradient(to right, #f0fbfc, transparent);
+            padding: 20px; margin: 25px 0;
+            font-style: italic; color: var(--base-dark-green); font-weight: 600;
+        }
+
+
+        /* --- SERVIÇOS (CARDS ABERTOS) --- */
+        .produtos { background-color: var(--bg-light); }
+        .section-header { text-align: center; margin-bottom: 60px; }
         .section-title { font-size: 2.5rem; position: relative; display: inline-block; color: var(--base-dark-green); }
         .section-title::after {
             content: ''; display: block; width: 60%; height: 4px;
             background-color: var(--primary-tiffany); margin: 15px auto 0; border-radius: 2px;
         }
 
-        /* --- EMPRESA --- */
-        .empresa { background-color: var(--white); display: flex; gap: 60px; align-items: center; }
-        .empresa-text { flex: 1; }
-        .empresa-img-box { flex: 1; height: 450px; position: relative; }
-        .empresa-img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; position: relative; z-index: 2; }
-        .empresa-img-box::before {
-            content: ''; position: absolute; top: 30px; left: -30px;
-            width: 100%; height: 100%; background-color: var(--primary-tiffany);
-            border-radius: 12px; z-index: 1; opacity: 0.3;
-        }
-        .highlight-box {
-            border-left: 5px solid var(--primary-tiffany);
-            padding-left: 20px; margin: 25px 0;
-            font-style: italic; color: var(--base-dark-green); font-weight: 600;
-        }
-
-        /* --- SERVIÇOS/PRODUTOS (MESCLA: Estrutura Cód 2 + Estilo Cód 1) --- */
-        .produtos { background-color: var(--bg-light); }
-        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .services-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
         
-        .card-produto {
-            background: var(--white);
-            border-radius: 15px; /* Mantém o arredondado moderno do Cód 1 */
-            overflow: hidden;    /* Essencial para a imagem respeitar a borda */
-            transition: 0.4s;
-            border: 1px solid transparent;
+        .service-card {
+            background: var(--white); flex: 1; min-width: 300px; max-width: 380px;
+            border-radius: 15px; overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
+            border: 1px solid #eee; display: flex; flex-direction: column;
+            transition: 0.3s;
         }
+        .service-card:hover { transform: translateY(-5px); border-color: var(--primary-tiffany); }
 
-        /* Hover com a cor Tiffany (Estilo Cód 1) */
-        .card-produto:hover {
-            border-color: var(--primary-tiffany);
-            box-shadow: 0 10px 30px rgba(71, 175, 186, 0.2);
-            transform: translateY(-10px);
+        .service-img-header { height: 150px; background-size: cover; background-position: center; position: relative; }
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex; align-items: flex-end; padding: 20px;
         }
-
-        /* Área da Imagem (Estrutura Cód 2 adaptada) */
-        .card-img {
-            height: 220px;
-            background-color: #ddd;
-            background-size: cover;
-            background-position: center;
-            border-bottom: 5px solid var(--primary-tiffany); /* Separador estiloso */
-        }
-
-        .card-content { 
-            padding: 30px; 
-            text-align: center; /* Centralizado para combinar com o design geral */
-            flex: 1;
-        }
+        .overlay h3 { color: var(--white); font-size: 1.4rem; margin: 0; }
         
-        .card-content h3 { 
-            color: var(--base-dark-green); 
-            margin-bottom: 15px; 
-            font-size: 1.35rem; 
+        .sub-services { padding: 20px; background-color: #fff; flex: 1; }
+        .sub-services ul li {
+            padding: 8px 0; border-bottom: 1px solid #f4f4f4; display: flex; align-items: center; gap: 10px;
+            font-size: 0.95rem; color: var(--base-grey);
         }
-        
-        .card-content p { font-size: 0.95rem; color: var(--base-grey); }
+        .dot { width: 6px; height: 6px; background: var(--accent-lion); border-radius: 50%; }
 
 
-        /* --- CONTATO (Estilo Código 1) --- */
-        .contato-wrapper {
-            display: flex; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        .info-box {
-            flex: 4; background-color: var(--primary-tiffany); color: var(--white); padding: 60px;
-        }
-        .info-box h2 { color: var(--white); font-size: 2.2rem; margin-bottom: 40px; }
-        .info-item { margin-bottom: 30px; display: flex; gap: 15px; align-items: flex-start; }
-        .info-icon { color: var(--accent-lion); font-size: 1.3rem; margin-top: 5px; }
-        .info-text h4 { color: var(--white); margin-bottom: 5px; font-size: 1.1rem; opacity: 0.9; }
-        .info-text p { font-size: 1.05rem; font-weight: 500; }
+        /* --- MAPA E RODAPÉ --- */
+        .map-section { height: 400px; width: 100%; }
+        .map-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); }
 
-        .btn-whatsapp {
-            background-color: var(--accent-lion); color: var(--white);
-            padding: 15px 30px; border-radius: 50px; font-weight: bold;
-            display: inline-flex; align-items: center; gap: 10px; margin-top: 20px;
-            box-shadow: 0 10px 20px -5px rgba(191, 140, 74, 0.6);
+        footer { background-color: var(--base-dark-green); color: rgba(255,255,255,0.8); padding: 80px 5% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { color: var(--white); margin-bottom: 25px; font-size: 1.2rem; border-bottom: 2px solid var(--accent-lion); display: inline-block; padding-bottom: 10px; }
+        .footer-info li { margin-bottom: 15px; display: flex; gap: 15px; font-size: 0.95rem; }
+        .footer-icon { color: var(--primary-tiffany); }
+        .footer-socials { display: flex; gap: 15px; margin-top: 20px; }
+        .social-btn {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s; color: var(--white);
         }
-        .btn-whatsapp:hover { background-color: var(--white); color: var(--accent-lion); }
-
-        .mapa-box { flex: 3; min-height: 400px; background-color: #ddd; }
-        .mapa-img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--base-dark-green);
-            color: rgba(255,255,255,0.7); padding: 50px 5% 20px; text-align: center;
-        }
-        footer .logo { color: var(--white); margin-bottom: 20px; display: inline-block; }
+        .social-btn:hover { background: var(--primary-tiffany); transform: translateY(-3px); }
+        .copyright { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
 
         /* --- RESPONSIVIDADE --- */
         @media (max-width: 992px) {
-            .hero-content h1 { font-size: 2.8rem; }
+            .hero { flex-direction: column; text-align: center; justify-content: center; padding-top: 120px; height: auto; padding-bottom: 60px; }
+            .hero-content { margin-bottom: 50px; }
+            .hero-content h1 { font-size: 3rem; }
+            
+            /* Empresa Mobile */
             .empresa { flex-direction: column; }
-            .empresa-img-box { width: 100%; height: 350px; }
-            .empresa-img-box::before { top: 20px; left: -20px; }
-            .contato-wrapper { flex-direction: column; }
-            .mapa-box { height: 300px; }
+            .slider-container { width: 100%; height: 400px; /* Ordem natural: Imagem em cima, texto em baixo */ }
         }
 
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
             nav {
                 position: absolute; top: 100%; left: 0; width: 100%;
-                background-color: var(--white);
-                border-top: 1px solid #eee;
+                background-color: var(--white); border-top: 1px solid #eee;
                 max-height: 0; overflow: hidden; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             }
             nav.active { max-height: 350px; padding: 20px 0; }
             nav ul { flex-direction: column; gap: 15px; }
-            nav a { display: block; padding: 10px; }
-            nav a::after { display: none; }
-            .btn-header { width: 80%; text-align: center; margin-top: 10px; box-shadow: none; }
-            
-            .hero { text-align: center; justify-content: center; }
+            .btn-header { width: 80%; text-align: center; margin: 10px auto; display: block; }
+
             .hero-content h1 { font-size: 2.2rem; }
             .section-title { font-size: 2rem; }
-            .info-box { padding: 40px 30px; }
+
+            /* Ajustes Parceiros Mobile */
+            .partners-hub { min-height: auto; height: auto; flex-direction: column; }
+            .partners-bg { background: linear-gradient(to bottom, var(--ml-yellow) 50%, var(--shopee-orange) 50%); }
+            .partners-container { flex-direction: column; }
+            .partner-zone { padding: 60px 20px; width: 100%; justify-content: center; gap: 30px; }
+            .zone-ml { padding-right: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); } 
+            .zone-shopee { padding-left: 20px; }
+            .hub-logo { max-width: 200px; }
+            .partner-desc { font-size: 0.9rem; padding: 0 10px; }
+
+            /* Serviços Mobile */
+            .services-container { flex-direction: column; }
+            .service-card { width: 100%; max-width: none; }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -264,19 +281,17 @@
 
     <header>
         <div class="logo">LIDER<span>ART</span></div>
-        
         <div class="menu-toggle" onclick="toggleMenu()">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
-
         <nav id="nav-menu">
             <ul>
-                <li><a href="home.html" onclick="toggleMenu()">Home</a></li>
-                <li><a href="empresa.html" onclick="toggleMenu()">A Empresa</a></li>
-                <li><a href="servicos.html">Serviços</a></li>
-                <li><a href="/contato" class="btn-header" onclick="toggleMenu()">Orçamento</a></li>
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#empresa" onclick="toggleMenu()">A Empresa</a></li>
+                <li><a href="#servicos" onclick="toggleMenu()">Soluções</a></li>
+                <li><a href="#contato" class="btn-header" onclick="toggleMenu()">Orçamento</a></li>
             </ul>
         </nav>
     </header>
@@ -287,106 +302,183 @@
             <p>Especialistas em comunicação visual, fachadas e produção gráfica que transmitem confiança e modernidade.</p>
             <a href="#servicos" class="btn-hero">Conhecer Soluções</a>
         </div>
-        
         <div class="hero-img-container">
             <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="hero-floating-img" alt="Exemplo de Fachada Liderart">
         </div>
     </section>
 
-    <section id="empresa" class="empresa section-padding">
-        <div class="empresa-img-box">
-            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="empresa-img" alt="Sede da Liderart">
+    <section class="partners-hub">
+        <div class="partners-bg"></div>
+        
+        <div class="partners-container">
+            
+            <div class="partner-zone zone-ml">
+                <img src="https://logodownload.org/wp-content/uploads/2018/10/mercado-livre-logo.png" class="hub-logo" alt="Mercado Livre">
+                
+                <p class="partner-desc">
+                    Pacotes lacrados, segurança no envio e garantia de recebimento. Compre com total confiança.
+                </p>
+
+                <div class="marketplace-cards">
+                    <a href="#" class="mp-card">
+                        <div class="mp-content">
+                            <span class="mp-label">Visite</span>
+                            <span class="mp-title">Nossas Lojas</span>
+                        </div>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                    <a href="#" class="mp-card">
+                        <div class="mp-content">
+                            <span class="mp-label">Informações</span>
+                            <span class="mp-title">Sobre Entrega</span>
+                        </div>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="partner-zone zone-shopee">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Shopee.svg/2560px-Shopee.svg.png" class="hub-logo shopee-logo" alt="Shopee">
+                
+                <p class="partner-desc desc-white">
+                    Aproveite nossos cupons exclusivos e receba seus produtos com a rapidez que sua empresa precisa.
+                </p>
+
+                <div class="marketplace-cards">
+                    <a href="#" class="mp-card">
+                        <div class="mp-content">
+                            <span class="mp-label">Visite</span>
+                            <span class="mp-title">Nossas Lojas</span>
+                        </div>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                    <a href="#" class="mp-card">
+                        <div class="mp-content">
+                            <span class="mp-label">Informações</span>
+                            <span class="mp-title">Sobre Entrega</span>
+                        </div>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
         </div>
+    </section>
+
+    <section id="empresa" class="empresa section-padding">
+        
+        <div class="slider-container">
+            <img class="slide active" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sede Liderart">
+            <img class="slide" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tecnologia">
+            <img class="slide" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Equipe">
+        </div>
+
         <div class="empresa-text">
-            <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+            <div class="section-header" style="text-align: left; margin-bottom: 20px;">
                 <h2 class="section-title" style="margin: 0;">Quem Somos</h2>
             </div>
-            <h3 class="text-tiffany" style="margin-bottom: 20px;">Mais de 16 anos de expertise.</h3>
-            <p>A Liderart está entre as maiores empresas de produção gráfica, impressão digital e comunicação visual de Minas Gerais. Nossa trajetória é marcada pela busca incessante pela qualidade e pela satisfação de clientes que exigem o melhor.</p>
-            
+            <h3 class="text-tiffany" style="margin-bottom: 20px;">Tradição e Modernidade.</h3>
+            <p>A Liderart é referência em produção gráfica e comunicação visual. Nossa estrutura completa nos permite atender desde a criação até a instalação final, garantindo controle total de qualidade.</p>
             <div class="highlight-box">
-                Combinamos tecnologia de ponta com acabamento refinado para projetos que exigem solidez e impacto visual.
+                "Não entregamos apenas materiais. Entregamos a imagem que sua empresa projeta para o mundo."
             </div>
-            <p>Localizados em sede própria no bairro Letícia em Belo Horizonte, estamos prontos para atender grandes demandas com agilidade e precisão técnica.</p>
+            <p>Com maquinário de ponta (Router CNC, Laser, Impressão UV) e equipe especializada, garantimos prazos ágeis e acabamento impecável.</p>
         </div>
+
     </section>
 
     <section id="servicos" class="produtos section-padding">
         <div class="section-header">
             <h2 class="section-title">Nossas Soluções</h2>
-            <p style="margin-top: 20px; max-width: 600px; margin-left: auto; margin-right: auto;">Tudo o que sua empresa precisa para se comunicar visualmente com excelência.</p>
+            <p style="margin-top: 15px;">Confira nossas principais linhas de atuação.</p>
         </div>
         
-        <div class="grid-produtos">
-            <div class="card-produto">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                <div class="card-content">
-                    <h3>Fachadas em ACM</h3>
-                    <p>Revestimentos modernos e duráveis para lojas e empresas, com letras caixa e iluminação LED de alto padrão.</p>
+        <div class="services-container">
+            
+            <div class="service-card">
+                <div class="service-img-header" style="background-image: url('https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                    <div class="overlay"><h3>Serviços Externos</h3></div>
+                </div>
+                <div class="sub-services">
+                    <ul>
+                        <li><div class="dot"></div> Fachadas em ACM</li>
+                        <li><div class="dot"></div> Letras Caixa (Relevo)</li>
+                        <li><div class="dot"></div> Logotipos Iluminados</li>
+                        <li><div class="dot"></div> Totens Institucionais</li>
+                        <li><div class="dot"></div> Revestimentos</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="card-produto">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                <div class="card-content">
-                    <h3>Impressão Digital HD</h3>
-                    <p>Banners, adesivos e lonas de grande formato com altíssima resolução e fidelidade às cores da sua marca.</p>
+            <div class="service-card">
+                <div class="service-img-header" style="background-image: url('https://images.unsplash.com/photo-1616423640778-28d1b53229bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                    <div class="overlay"><h3>Serviços Internos</h3></div>
+                </div>
+                <div class="sub-services">
+                    <ul>
+                        <li><div class="dot"></div> Sinalização Corporativa</li>
+                        <li><div class="dot"></div> Placas de Setorização</li>
+                        <li><div class="dot"></div> Adesivação de Paredes</li>
+                        <li><div class="dot"></div> Quadros de Aviso</li>
+                        <li><div class="dot"></div> Decoração de Ambientes</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="card-produto">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1622675363311-ac60113426da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                <div class="card-content">
-                    <h3>Troféus e Placas</h3>
-                    <p>Premiações exclusivas personalizadas em acrílico, metal e madeira para eventos corporativos e esportivos.</p>
+            <div class="service-card">
+                <div class="service-img-header" style="background-image: url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                    <div class="overlay"><h3>Produção Gráfica</h3></div>
+                </div>
+                <div class="sub-services">
+                    <ul>
+                        <li><div class="dot"></div> Banners e Lonas</li>
+                        <li><div class="dot"></div> Adesivos em Vinil</li>
+                        <li><div class="dot"></div> Cartões de Visita</li>
+                        <li><div class="dot"></div> Troféus Personalizados</li>
+                        <li><div class="dot"></div> Panfletos e Folders</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="card-produto">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1616423640778-28d1b53229bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                <div class="card-content">
-                    <h3>Sinalização Interna</h3>
-                    <p>Placas de setorização, sinalização de segurança e decoração corporativa que organizam seu ambiente.</p>
-                </div>
-            </div>
         </div>
     </section>
 
-    <section id="contato" class="section-padding" style="background-color: var(--white);">
-        <div class="contato-wrapper">
-            <div class="info-box">
-                <h2>Fale com Especialistas</h2>
-                
-                <div class="info-item">
-                    <div class="info-icon">📍</div>
-                    <div class="info-text">
-                        <h4>Endereço Sede</h4>
-                        <p>Rua José Benevides da Silveira, 26<br>Bairro Letícia - Belo Horizonte, MG</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">⏰</div>
-                    <div class="info-text">
-                        <h4>Atendimento</h4>
-                        <p>Segunda a Sexta: 08h às 18h</p>
-                    </div>
-                </div>
+    <div class="map-section">
+        <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" class="map-img" alt="Mapa Localização">
+    </div>
 
-                <a href="#" class="btn-whatsapp">
-                   Solicitar Orçamento via WhatsApp
-                </a>
+    <footer id="contato">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:15px; display:block;">LIDER<span>ART</span></div>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Transformando ideias em impacto visual desde 2008.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">WA</a>
+                </div>
             </div>
 
-            <div class="mapa-box">
-                <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" class="mapa-img" alt="Mapa de localização Liderart">
+            <div class="footer-col">
+                <h4>Onde Estamos</h4>
+                <ul class="footer-info">
+                    <li><span class="footer-icon">📍</span> Rua José Benevides da Silveira, 26<br>Bairro Letícia - Belo Horizonte, MG</li>
+                    <li><span class="footer-icon">📞</span> (31) 3333-3333</li>
+                    <li><span class="footer-icon">✉️</span> contato@liderart.com.br</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Horário de Funcionamento</h4>
+                <ul class="footer-info">
+                    <li><span class="footer-icon">⏰</span> Seg a Sex: 08:00 - 18:00</li>
+                    <li><span class="footer-icon">📅</span> Sábado: 08:00 - 12:00</li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="logo">LIDER<span>ART</span></div>
-        <p>&copy; 2024 Liderart Comunicação Visual. Todos os direitos reservados.</p>
+        <div class="copyright">
+            &copy; 2024 Liderart Comunicação Visual. Todos os direitos reservados.
+        </div>
     </footer>
 
     <script>
@@ -394,6 +486,19 @@
             var nav = document.getElementById('nav-menu');
             nav.classList.toggle('active');
         }
+
+        // Script para o Slider Automático da seção Quem Somos
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Troca a cada 3 segundos
+        setInterval(nextSlide, 3000);
     </script>
 </body>
 </html>
