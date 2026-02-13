@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços Externos | Liderart</title>
+    <style>
+        /* --- PALETA DE CORES (Consistência Total) --- */
+        :root {
+            --primary-tiffany: #47AFBA;
+            --primary-dark: #358a94;
+            --white: #ffffff;
+            --base-dark-green: #053225;
+            --base-grey: #7E777C;
+            --accent-lion: #BF8C4A;
+            --bg-light: #f9fbfb;
+        }
+
+        /* --- GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body { color: var(--base-grey); background-color: var(--bg-light); line-height: 1.7; }
+        a { text-decoration: none; transition: 0.3s ease; }
+        ul { list-style: none; }
+        h1, h2, h3, h4 { color: var(--base-dark-green); font-weight: 700; letter-spacing: -0.5px; }
+        img { max-width: 100%; display: block; }
+
+        /* Utilitários */
+        .section-padding { padding: 80px 5%; }
+
+        /* --- HEADER (Reutilizado) --- */
+        header {
+            background-color: var(--white);
+            padding: 1rem 5%;
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        .logo { color: var(--base-dark-green); font-size: 1.6rem; font-weight: 800; text-transform: uppercase; }
+        .logo span { color: var(--primary-tiffany); }
+
+        nav ul { display: flex; gap: 35px; align-items: center; }
+        nav a { color: var(--base-dark-green); font-size: 0.95rem; font-weight: 600; position: relative; }
+        nav a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -5px; left: 0; background-color: var(--primary-tiffany); transition: 0.3s;
+        }
+        nav a:hover { color: var(--primary-tiffany); }
+        nav a:hover::after { width: 100%; }
+
+        .btn-header {
+            background-color: var(--primary-tiffany); padding: 12px 30px; border-radius: 50px;
+            color: var(--white) !important; font-weight: bold; box-shadow: 0 4px 15px rgba(71, 175, 186, 0.3);
+        }
+        .btn-header:hover { background-color: var(--base-dark-green); transform: translateY(-2px); }
+
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 6px; }
+        .bar { width: 30px; height: 3px; background-color: var(--base-dark-green); border-radius: 3px; }
+
+        /* --- PAGE HERO (Pequeno) --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-tiffany) 0%, var(--primary-dark) 100%);
+            padding: 140px 5% 60px;
+            color: var(--white); text-align: center; position: relative; overflow: hidden;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .page-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--white); position: relative; z-index: 2; }
+        .breadcrumbs { font-size: 0.9rem; opacity: 0.9; position: relative; z-index: 2; }
+        .breadcrumbs a { color: var(--white); font-weight: 600; }
+
+
+        /* --- LAYOUT DO CATÁLOGO --- */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Sidebar fixa + Conteúdo fluido */
+            gap: 50px;
+            padding: 80px 5%;
+            max-width: 1400px; margin: 0 auto;
+        }
+
+        /* Sidebar de Categorias */
+        .sidebar-title {
+            font-size: 1.2rem; margin-bottom: 20px; border-bottom: 2px solid var(--accent-lion);
+            padding-bottom: 10px; display: inline-block;
+        }
+        
+        .category-nav {
+            background: var(--white); padding: 20px; border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); position: sticky; top: 100px;
+        }
+
+        .cat-link {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 15px; margin-bottom: 10px; border-radius: 8px;
+            color: var(--base-grey); font-weight: 600; transition: 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .cat-link:hover { background-color: #f4f4f4; color: var(--base-dark-green); padding-left: 20px; }
+
+        /* Estado Ativo (Onde o usuário clicou) */
+        .cat-link.active {
+            background-color: rgba(71, 175, 186, 0.1);
+            color: var(--primary-tiffany);
+            border-left-color: var(--primary-tiffany);
+        }
+        
+        .cat-count { font-size: 0.8rem; background: #eee; padding: 2px 8px; border-radius: 20px; color: #888; }
+        .active .cat-count { background: var(--primary-tiffany); color: white; }
+
+
+        /* Grade de Serviços Específicos */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-item {
+            background: var(--white); border-radius: 15px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
+            border: 1px solid transparent; display: flex; flex-direction: column;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary-tiffany);
+        }
+
+        .item-img {
+            height: 220px; width: 100%; object-fit: cover;
+            border-bottom: 4px solid var(--accent-lion);
+        }
+
+        .item-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .item-content h3 { color: var(--base-dark-green); font-size: 1.4rem; margin-bottom: 10px; }
+        .item-content p { font-size: 0.95rem; color: #666; margin-bottom: 20px; flex: 1; }
+
+        .btn-details {
+            text-align: center; padding: 12px; border-radius: 8px;
+            background-color: var(--bg-light); color: var(--primary-tiffany);
+            font-weight: 700; transition: 0.3s; border: 1px solid var(--primary-tiffany);
+        }
+        
+        .btn-details:hover {
+            background-color: var(--primary-tiffany); color: var(--white);
+        }
+
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--base-dark-green); color: rgba(255,255,255,0.8); padding: 80px 5% 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { color: var(--white); margin-bottom: 25px; font-size: 1.2rem; border-bottom: 2px solid var(--accent-lion); display: inline-block; padding-bottom: 10px; }
+        .footer-info li { margin-bottom: 15px; display: flex; gap: 15px; font-size: 0.95rem; }
+        .footer-icon { color: var(--primary-tiffany); }
+        .footer-socials { display: flex; gap: 15px; margin-top: 20px; }
+        .social-btn {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s; color: var(--white);
+        }
+        .social-btn:hover { background: var(--primary-tiffany); transform: translateY(-3px); }
+        .copyright { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 992px) {
+            .catalog-container { grid-template-columns: 1fr; } /* Sidebar vai para cima */
+            .category-nav { display: flex; flex-wrap: wrap; gap: 10px; position: static; }
+            .cat-link { flex: 1; min-width: 200px; justify-content: center; margin-bottom: 0; }
+            .sidebar-title { display: block; text-align: center; border: none; margin-bottom: 10px; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            nav {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background-color: var(--white); border-top: 1px solid #eee;
+                max-height: 0; overflow: hidden; transition: 0.3s;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            nav.active { max-height: 350px; padding: 20px 0; }
+            nav ul { flex-direction: column; gap: 15px; }
+            .btn-header { width: 80%; text-align: center; margin: 10px auto; display: block; }
+            
+            .page-title { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">LIDER<span>ART</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="empresa.html">A Empresa</a></li>
+                <li><a href="#" style="color: var(--primary-tiffany);">Serviços</a></li>
+                <li><a href="#contato" class="btn-header">Orçamento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1 class="page-title">Nossos Serviços</h1>
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> &nbsp;/&nbsp; Soluções &nbsp;/&nbsp; Serviços Externos
+        </div>
+    </div>
+
+    <div class="catalog-container">
+        
+        <aside>
+            <h3 class="sidebar-title">Categorias</h3>
+            <div class="category-nav">
+                <a href="#" class="cat-link active">
+                    <span>Serviços Externos</span>
+                    <span class="cat-count">5</span>
+                </a>
+                
+                <a href="#" class="cat-link">
+                    <span>Serviços Internos</span>
+                    <span class="cat-count">4</span>
+                </a>
+                <a href="#" class="cat-link">
+                    <span>Produção Gráfica</span>
+                    <span class="cat-count">6</span>
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <h2 style="margin-bottom: 30px;">Soluções Externas</h2>
+            
+            <div class="services-grid">
+                
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Fachadas em ACM" class="item-img">
+                    <div class="item-content">
+                        <h3>Fachadas em ACM</h3>
+                        <p>Revestimentos modernos e duráveis para lojas e empresas, com letras caixa e iluminação LED de alto padrão.</p>
+                        <a href="servico-detalhe.html" class="btn-details">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Letras Caixa" class="item-img">
+                    <div class="item-content">
+                        <h3>Letras Caixa (Relevo)</h3>
+                        <p>Destaque sua marca com letras em relevo 3D, fabricadas em aço inox, galvanizado ou acrílico com acabamento premium.</p>
+                        <a href="servico-detalhe.html" class="btn-details">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1550645617-361771211e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Logotipos Iluminados" class="item-img">
+                    <div class="item-content">
+                        <h3>Logotipos Iluminados</h3>
+                        <p>Iluminação frontal, indireta (backlight) ou neon LED para garantir visibilidade dia e noite para seu negócio.</p>
+                        <a href="servico-detalhe.html" class="btn-details">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Totens" class="item-img">
+                    <div class="item-content">
+                        <h3>Totens Institucionais</h3>
+                        <p>Sinalização vertical de grande porte para entrada de empresas, shoppings e condomínios.</p>
+                        <a href="servico-detalhe.html" class="btn-details">Ver Detalhes</a>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <img src="https://images.unsplash.com/photo-1626177181135-433c2fa98377?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Revestimentos" class="item-img">
+                    <div class="item-content">
+                        <h3>Revestimentos Especiais</h3>
+                        <p>Painéis ripados, estruturas metálicas e soluções personalizadas para modernização de fachadas.</p>
+                        <a href="servico-detalhe.html" class="btn-details">Ver Detalhes</a>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:15px; display:block;">LIDER<span>ART</span></div>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Transformando ideias em impacto visual desde 2008.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">WA</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Onde Estamos</h4>
+                <ul class="footer-info">
+                    <li><span class="footer-icon">📍</span> Rua José Benevides da Silveira, 26<br>Bairro Letícia - Belo Horizonte, MG</li>
+                    <li><span class="footer-icon">📞</span> (31) 3333-3333</li>
+                    <li><span class="footer-icon">✉️</span> contato@liderart.com.br</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Horário de Funcionamento</h4>
+                <ul class="footer-info">
+                    <li><span class="footer-icon">⏰</span> Seg a Sex: 08:00 - 18:00</li>
+                    <li><span class="footer-icon">📅</span> Sábado: 08:00 - 12:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Liderart Comunicação Visual. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
